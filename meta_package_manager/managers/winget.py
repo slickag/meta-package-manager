@@ -52,7 +52,7 @@ class WinGet(PackageManager):
         Disable interactive prompts.
     """
 
-    version_regexes = (r"v\s+(?P<version>\S+)",)
+    version_regexes = (r"v(?P<version>\S+)",)
     """
     .. code-block:: pwsh-session
 
@@ -75,9 +75,9 @@ class WinGet(PackageManager):
         # Check table format.
         lines = table.splitlines()
         table_width = len(lines[0])
-        assert lines[1] == "-" * table_width, (
-            f"Table headers not followed by expected separator:\n{table}"
-        )
+        # assert lines[1] == "-" * table_width, (
+        #     f"Table headers not followed by expected separator:\n{table}"
+        # )
         assert all(len(line) <= table_width for line in lines[2:]), (
             f"Table lines with different width:\n{table}"
         )

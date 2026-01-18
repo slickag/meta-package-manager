@@ -37,7 +37,7 @@ class VSCode(PackageManager):
 
     requirement = "1.60.0"
 
-    cli_names = ("code",)
+    cli_names = ("code", "code-insiders")
     """
     .. code-block:: shell-session
 
@@ -90,4 +90,4 @@ class VSCode(PackageManager):
 
 class VSCodium(VSCode):
     homepage_url = "https://vscodium.com"
-    cli_names = ("codium",)
+    cli_names = ("codium", "vscodium")
