@@ -5,9 +5,9 @@ name: Tests
     branches:
       - main
   pull_request:
-  schedule:
-    # Run tests every Monday at 9:17 to catch regressions.
-    - cron: "17 9 * * 1"
+  # schedule:
+  #   # Run tests every Monday at 9:17 to catch regressions.
+  #   - cron: "17 9 * * 1"
 
 concurrency:
   # Group workflow jobs so new commits cancels in-progress execution triggered by previous commits. Source:
@@ -17,7 +17,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   tests:
     strategy:
       # We delegate the failure decision to each job, by the way of the "continue-on-error" flag.
@@ -500,16 +499,16 @@ jobs:
           --numprocesses=0 --skip-non-destructive --run-destructive
           --ignore=./tests/test_bar_plugin.py
 
-      - name: Codecov - coverage
-        uses: codecov/codecov-action@v5.5.2
-        with:
-          report_type: coverage
-          token: ${{ secrets.CODECOV_TOKEN }}
-      - name: Codecov - test results
-        uses: codecov/codecov-action@v5.5.2
-        with:
-          report_type: test_results
-          token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Codecov - coverage
+      #   uses: codecov/codecov-action@v5.5.2
+      #   with:
+      #     report_type: coverage
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      # - name: Codecov - test results
+      #   uses: codecov/codecov-action@v5.5.2
+      #   with:
+      #     report_type: test_results
+      #     token: ${{ secrets.CODECOV_TOKEN }}
 
   # Test that mpm from other package managers.
   #
@@ -640,12 +639,12 @@ jobs:
         with:
           # windows-2025 runners have only Python 3.9 installed.
           python-version: ${{ matrix.os == 'windows-2025' && '3.10' || ''}}
-      # https://pypi.org/project/meta-package-manager
-      - name: Run stable CLI
-        run: |
-          uvx    --from meta-package-manager -- mpm --version
-          uv run --with meta-package-manager -- mpm --version
+      # # https://pypi.org/project/meta-package-manager
+      # - name: Run stable CLI
+      #   run: |
+      #     uvx    --from meta-package-manager -- mpm --version
+      #     uv run --with meta-package-manager -- mpm --version
       - name: Run dev CLI
         run: |
-          uvx    --from git+https://github.com/kdeldycke/meta-package-manager -- mpm --version
-          uv run --with git+https://github.com/kdeldycke/meta-package-manager -- mpm --version
+          uvx    --from git+https://github.com/slickag/meta-package-manager -- mpm --version
+          uv run --with git+https://github.com/slickag/meta-package-manager -- mpm --version

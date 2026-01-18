@@ -2,6 +2,7 @@
 name: Build & release
 "on":
   # Target are chosen so that all commits get a chance to have their build tested.
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -10,8 +11,8 @@ name: Build & release
 jobs:
 
   release:
-    uses: kdeldycke/workflows/.github/workflows/release.yaml@v4.25.5
-    secrets:
-      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    uses: slickag/mpm-workflows/.github/workflows/release.yaml@main
+    # secrets:
+    #   PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
     with:
       timeout: 300
